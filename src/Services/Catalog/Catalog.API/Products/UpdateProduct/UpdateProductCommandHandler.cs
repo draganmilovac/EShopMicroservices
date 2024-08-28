@@ -1,8 +1,23 @@
 ﻿
+using FluentValidation;
+
 namespace Catalog.API.Products.UpdateProduct
 {
     public record UpdateProductCommandRequest(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price) : ICommand<UpdateProductCommandResponse>;
     public record UpdateProductCommandResponse(bool IsSuccess);
+
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommandRequest>
+    {
+        public UpdateProductCommandValidator() 
+        {
+            RuleFor(x => x.Id).NotEmpty().WithMessage("Product ID is required");
+
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required")
+                .Length(2, 150).WithMessage("Nume must be between 2 and 150 characters");
+
+            RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greather than 0");
+        }
+    }
     public class UpdateProductCommandHandler(IDocumentSession session)
         : ICommandHandler<UpdateProductCommandRequest, UpdateProductCommandResponse>
     {

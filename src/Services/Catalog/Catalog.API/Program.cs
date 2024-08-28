@@ -1,3 +1,4 @@
+using BuildingBlocks.Behaviours;
 using Carter;
 using FluentValidation;
 
@@ -7,6 +8,7 @@ builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
 });
 builder.Services.AddMarten(opts =>
 {
@@ -18,4 +20,5 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 var app = builder.Build();
 
 app.MapCarter();
+
 app.Run();

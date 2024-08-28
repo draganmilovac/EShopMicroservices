@@ -1,7 +1,17 @@
-﻿namespace Catalog.API.Products.DeleteProduct
+﻿using FluentValidation;
+
+namespace Catalog.API.Products.DeleteProduct
 {
     public record DeleteProductCommandRequest(Guid Id) : ICommand<DeleteProductCommandResponse>;
     public record DeleteProductCommandResponse(bool IsSuccess);
+
+    public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommandRequest>
+    {
+        public DeleteProductCommandValidator() 
+        {
+            RuleFor(x => x.Id).NotEmpty().WithMessage("Product ID is required");
+        }
+    }
     public class DeleteProductCommandHandler(IDocumentSession session)
         : ICommandHandler<DeleteProductCommandRequest, DeleteProductCommandResponse>
     {
