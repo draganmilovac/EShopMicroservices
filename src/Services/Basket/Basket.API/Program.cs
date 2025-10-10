@@ -1,4 +1,6 @@
+using Basket.API.Data;
 using Basket.API.Models;
+using BuildingBlocks.Exceptions.Handler;
 using Carter;
 using Marten;
 
@@ -14,7 +16,10 @@ builder.Services.AddMarten(opts =>
     opts.Schema.For<ShoppingCart>().Identity(x=>x.UserName);
 })
 .UseLightweightSessions();
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 var app = builder.Build();
 
 app.MapCarter();
+app.UseExceptionHandler(options => { });
 app.Run();

@@ -1,7 +1,12 @@
-﻿namespace Basket.API.Exceptions
+﻿using BuildingBlocks.Exceptions;
+
+namespace Basket.API.Exceptions
 {
-    public class BasketNotFoundException : Exception
+    public class BasketNotFoundException : NotFoundException
     {
-        public BasketNotFoundException(string userName) : base("Basket") { }
+        public BasketNotFoundException(string userName) : base("Basket", userName)
+        {
+
+        }
     }
 }

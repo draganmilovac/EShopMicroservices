@@ -1,6 +1,6 @@
-﻿using Basket.API.Models;
+﻿using Basket.API.Exceptions;
+using Basket.API.Models;
 using Marten;
-using Basket.API.Exceptions;
 
 namespace Basket.API.Data
 {
@@ -8,10 +8,8 @@ namespace Basket.API.Data
     {
         public async Task<ShoppingCart> GetBasket(string userName, CancellationToken cancellationToken = default)
         {
-            //var product = await session.LoadAsync<Product>(query.Id, cancellationToken);
-
             var basket = await session.LoadAsync<ShoppingCart>(userName, cancellationToken);
-            return basket is null ? null : basket;
+            return basket is null ? throw new BasketNotFoundException(userName) : basket;
         }
         public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
         {
