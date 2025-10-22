@@ -15,7 +15,7 @@ namespace Ordering.Infrastructure.Data
         public DbSet<Customer>  Customers => Set<Customer>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
-        public DbSet<OrderItem> Orders => Set<OrderItem>();
+        public DbSet<Order> Orders => Set<Order>();
 
 
         protected override void OnModelCreating(ModelBuilder builder)

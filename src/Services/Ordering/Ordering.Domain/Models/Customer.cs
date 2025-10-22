@@ -8,7 +8,7 @@ namespace Ordering.Domain.Models
         public string Name { get; private set; } = default!;
         public string Email { get; private set; } = default!;
 
-        public Customer CreateCustomer(CustomerId customerId, string name, string email)
+        public static Customer Create(CustomerId customerId, string name, string email)
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
             ArgumentException.ThrowIfNullOrEmpty(email);

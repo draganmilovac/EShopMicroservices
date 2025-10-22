@@ -8,7 +8,7 @@ namespace Ordering.Domain.Models
         public string Name { get; private set; } = default!;
         public decimal Price { get; private set; } = default!;
 
-        public Product CreateCustomer(ProductId customerId, string name, decimal price)
+        public static Product Create(ProductId customerId, string name, decimal price)
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);

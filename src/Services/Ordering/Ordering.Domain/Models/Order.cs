@@ -2,7 +2,6 @@
 using Ordering.Domain.Enums;
 using Ordering.Domain.Events;
 using Ordering.Domain.ValueObjects;
-using System.Net.Sockets;
 
 namespace Ordering.Domain.Models
 {
